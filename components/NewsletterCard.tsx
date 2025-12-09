@@ -11,11 +11,8 @@ export default function NewsletterCard({ newsletter }: NewsletterCardProps) {
     <article className="bg-red-600 text-white rounded-lg border-2 border-red-600 p-3 hover:border-red-700 hover:shadow-md transition-all">
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
-          <div className="text-[10px] font-semibold uppercase tracking-wide mb-1 text-red-100">
-            Newsletter
-          </div>
           <div className="text-xs font-medium mb-1.5">
-            {newsletter.dateLabel} – {newsletter.itemCount} Meldungen
+            MORNING BRIEFING von {newsletter.dateLabel} – {newsletter.itemCount} Meldungen
           </div>
           <h2 className="text-xs font-semibold">
             {newsletter.title}

@@ -2,7 +2,8 @@ export type Article = {
   id: string;
   title: string;
   summary: string;
-  publishedAt: string;          // ISO string
+  publishedAt: string;          // ISO string - newsletter publication time
+  originalPublishedAt?: string; // ISO string - original article publication time from source
   companies: string[];         // Companies we report about
   source: string;               // Source publication
   topics: string[];             // Topics/themes
@@ -13,6 +14,199 @@ export type Article = {
 };
 
 export const mockArticles: Article[] = [
+  {
+    id: 'newsletter-1',
+    title: 'Erfolgsfaktor Payment: Mehr Kosteneffizienz und Unabhängigkeit mit der richtigen Zahlungslösung',
+    summary: 'Der deutsche Handel steht unter Druck: Steigende Energiekosten, Inflation, Personalmangel und volatile Lieferketten belasten die Margen. Zuverlässige und planbare Kostenstrukturen sind wichtiger denn je. Gleichzeitig wachsen die Abhängigkeiten von internationalen Konzernen – auch bei kritischen Infrastrukturen wie Zahlungssystemen.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-11-30T17:06:00Z',
+    companies: [],
+    source: 'etailment.de',
+    topics: ['Payments'],
+    countries: ['DE'],
+    tags: ['payments', 'infrastructure', 'cost-efficiency'],
+    content: 'Der deutsche Handel steht unter Druck: Steigende Energiekosten, Inflation, Personalmangel und volatile Lieferketten belasten die Margen. Zuverlässige und planbare Kostenstrukturen sind wichtiger denn je. Gleichzeitig wachsen die Abhängigkeiten von internationalen Konzernen – auch bei kritischen Infrastrukturen wie Zahlungssystemen. Umso relevanter ist es für den Handel, sich nun mit der eigenen Bezahlinfrastruktur und den damit verbundenen Kosten und Abhängigkeiten zu beschäftigen.'
+  },
+  {
+    id: 'newsletter-2',
+    title: 'VHS und Verbraucherzentrale lehren Online-Shopping',
+    summary: 'Der Deutsche Volkshochschul-Verband und die Verbraucherzentrale Baden-Württemberg bieten einen kostenlosen Online-Kurs für sicheres Einkaufen im Internet an. Das Lernprogramm richte sich besonders an Menschen mit eingeschränkten Lese- und Schreibfähigkeiten und vermittele in 25 Einheiten zentrale Aspekte wie Zahlungssicherheit, Verbraucherrechte und Umtauschregelungen.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-08T00:37:27Z',
+    companies: [],
+    source: 'Retail-News.de',
+    topics: ['Consumer Behavior'],
+    countries: ['DE'],
+    tags: ['online-shopping', 'education', 'consumer-rights'],
+    content: 'Der Deutsche Volkshochschul-Verband und die Verbraucherzentrale Baden-Württemberg bieten einen kostenlosen Online-Kurs für sicheres Einkaufen im Internet an, berichtet Retail-News.de. Das Lernprogramm richte sich besonders an Menschen mit eingeschränkten Lese- und Schreibfähigkeiten und vermittele in 25 Einheiten zentrale Aspekte wie Zahlungssicherheit, Verbraucherrechte und Umtauschregelungen. Jede Lektion dauere 15 bis 30 Minuten und enthalte interaktive Aufgaben in einfacher Sprache. Ab Januar stehe das Angebot zusätzlich als App zur Verfügung.'
+  },
+  {
+    id: 'newsletter-3',
+    title: 'Zwei Freunde auf dem Weg zum weltweiten Erfolg: Wie das Unternehmen Blockhütte zum Rising Star wurde und welche Rolle Amazon Ads dabei spielt',
+    summary: 'Was mit zwei besten Freunden, einer gemeinsamen Vision für nachhaltige Lunchboxen und einer Investition von 3.000 € begann, hat sich zu einem Unternehmen mit einem Umsatz von 6 Millionen € entwickelt. Ihre Geschichte ist nur eine von vielen faszinierenden Erfolgsgeschichten, die in der innovativen Doku-Serie "Rising Stars by Amazon Ads" vorgestellt werden.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-11-30T17:05:00Z',
+    companies: ['Amazon', 'Blockhütte'],
+    source: 'etailment.de',
+    topics: ['Marketplace'],
+    countries: ['DE'],
+    tags: ['amazon-ads', 'success-story', 'sustainability', 'growth'],
+    metrics: {
+      revenue: '€6M',
+      initialInvestment: '€3,000'
+    },
+    content: 'Was mit zwei besten Freunden, einer gemeinsamen Vision für nachhaltige Lunchboxen und einer Investition von 3.000 € begann, hat sich zu einem Unternehmen mit einem Umsatz von 6 Millionen € entwickelt. Ihre Geschichte ist nur eine von vielen faszinierenden Erfolgsgeschichten, die in der innovativen Doku-Serie "Rising Stars by Amazon Ads" vorgestellt werden, die die wahren Geschichten hinter aufstrebenden Marken aus Europa erzählt.'
+  },
+  {
+    id: 'newsletter-4',
+    title: 'Kein Ende der Insolvenzwelle in Sicht',
+    summary: 'Der Handel erlebt schwere Zeiten: Die Insolvenzen kletterten im vergangenen Jahr um 10,4 Prozent. Ähnlich düster sieht es nur im Verarbeitenden Gewerbe aus, wo die Pleiten um 10,3 Prozent zulegten. In beiden Branchen liegen die Fallzahlen mittlerweile ein Drittel über dem Niveau vor der Pandemie.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    companies: ['Creditreform'],
+    source: 'Creditreform.de',
+    topics: ['Marketplace'],
+    countries: ['DE'],
+    tags: ['insolvenz', 'handel', 'wirtschaft'],
+    metrics: {
+      insolvenzIncrease: '10.4%'
+    },
+    content: 'Der Handel erlebt schwere Zeiten: Die Insolvenzen kletterten im vergangenen Jahr um 10,4 Prozent, meldet Creditreform.de. Ähnlich düster sieht es nur im Verarbeitenden Gewerbe aus, wo die Pleiten um 10,3 Prozent zulegten. In beiden Branchen liegen die Fallzahlen mittlerweile ein Drittel über dem Niveau vor der Pandemie. Auch die Bonität vieler Unternehmen verschlechtere sich weiter. Creditreform-Hauptgeschäftsführer Bernd Bütow prognostiziert einen weiteren Anstieg durch die sinkende Wettbewerbsfähigkeit.'
+  },
+  {
+    id: 'newsletter-5',
+    title: 'Maximale Verfügbarkeit: Wie die GRUBE KG ihren Onlinehandel resilient und sicher macht',
+    summary: 'Die GRUBE KG zeigt, wie digitale Transformation im Mittelstand gelingt: Europas führender Anbieter für Forstbedarf erzielt 80 % seines Umsatzes online und setzt dabei auf hochverfügbare Glasfaser, starke IT-Security und skalierbare Infrastruktur von EWE.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-05T18:03:00Z',
+    companies: ['GRUBE KG', 'EWE'],
+    source: 'etailment.de',
+    topics: ['Logistics'],
+    countries: ['DE'],
+    tags: ['infrastructure', 'security', 'digital-transformation', 'availability'],
+    metrics: {
+      onlineRevenue: '80%'
+    },
+    content: 'Die GRUBE KG zeigt, wie digitale Transformation im Mittelstand gelingt: Europas führender Anbieter für Forstbedarf erzielt 80 % seines Umsatzes online und setzt dabei auf hochverfügbare Glasfaser, starke IT-Security und skalierbare Infrastruktur von EWE. So bleiben Shop, Logistik und Mitarbeitende jederzeit erreichbar – und das Wachstum europaweit abgesichert.'
+  },
+  {
+    id: 'newsletter-6',
+    title: 'Billionen-Export: China weicht nach Europa aus',
+    summary: 'Chinas Exportüberschuss hat erstmals die Billionen-Dollar-Schwelle durchbrochen. Allein im November hätten die Ausfuhren die Einfuhren um 112 Mrd. Dollar übertroffen. Während die US-Exporte wegen der 47,5-prozentigen Zölle um 29 Prozent einbrachen, stiegen die Lieferungen in die EU um fast 15 Prozent auf 47 Mrd. Euro.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-08T08:41:00Z',
+    companies: [],
+    source: 'Manager-Magazin.de',
+    topics: ['Marketplace'],
+    countries: ['China', 'DE', 'EU'],
+    tags: ['china', 'export', 'handel', 'zölle'],
+    metrics: {
+      exportSurplus: '$1T',
+      novemberSurplus: '$112B',
+      euIncrease: '15%'
+    },
+    content: 'Chinas Exportüberschuss hat erstmals die Billionen-Dollar-Schwelle durchbrochen, meldet Manager-Magazin.de. Allein im November hätten die Ausfuhren die Einfuhren um 112 Mrd. Dollar übertroffen. Während die US-Exporte wegen der 47,5-prozentigen Zölle um 29 Prozent einbrachen, stiegen die Lieferungen in die EU um fast 15 Prozent auf 47 Mrd. Euro. Experten vermuten Handelsumlenkung: Ursprünglich für Amerika gedachte Ware lande nun in Europa.'
+  },
+  {
+    id: 'newsletter-7',
+    title: 'Frankreich verschont Shein – unter Auflagen',
+    summary: 'Frankreich verzichtet vorerst auf ein dreimonatiges Verbot von Shein. Der Fastfashion-Riese müsse allerdings Altersverifikation und Filter einführen, damit Minderjährige keinen Zugang zu pornografischen Inhalten erhielten. Der Marktplatz bleibe abgeschaltet, bis Shein der Kommunikationsbehörde Arcom die geforderten Kontrollen nachweise.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-08T08:13:59Z',
+    companies: ['Shein'],
+    source: 'Drapersonline.com',
+    topics: ['Marketplace'],
+    countries: ['France'],
+    tags: ['shein', 'regulation', 'marketplace', 'compliance'],
+    content: 'Frankreich verzichtet laut Drapersonline.com vorerst auf ein dreimonatiges Verbot von Shein. Der Fastfashion-Riese müsse allerdings Altersverifikation und Filter einführen, damit Minderjährige keinen Zugang zu pornografischen Inhalten erhielten. Hintergrund sei der Fund von kinderähnlichen Sexpuppen und verbotenen Waffen auf der Plattform im November. Der Marktplatz bleibe abgeschaltet, bis Shein der Kommunikationsbehörde Arcom die geforderten Kontrollen nachweise.'
+  },
+  {
+    id: 'newsletter-8',
+    title: 'Cyber Monday schlägt Black Friday auch im UK',
+    summary: 'Britische Online-Käufer hätten dieses Jahr die Geduld zur Tugend gemacht und erst am Cyber Monday zugeschlagen. Das Bestellvolumen am Montag habe den Black Friday um siebzig Prozent übertroffen. Insgesamt seien die Online-Bestellungen zwischen dem 28. November und 1. Dezember um fünfzehn Prozent gegenüber dem Vorjahr gestiegen.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-08T09:19:49Z',
+    companies: [],
+    source: 'Channelx.world',
+    topics: ['Consumer Behavior'],
+    countries: ['UK'],
+    tags: ['cyber-monday', 'black-friday', 'uk', 'e-commerce'],
+    metrics: {
+      cyberMondayIncrease: '70%',
+      overallIncrease: '15%'
+    },
+    content: 'Britische Online-Käufer hätten dieses Jahr die Geduld zur Tugend gemacht und erst am Cyber Monday zugeschlagen, meldet die Delivery-Plattform Scurri laut Channelx.world. Das Bestellvolumen am Montag habe den Black Friday um siebzig Prozent übertroffen. Insgesamt seien die Online-Bestellungen zwischen dem 28. November und 1. Dezember um fünfzehn Prozent gegenüber dem Vorjahr gestiegen.'
+  },
+  {
+    id: 'newsletter-9',
+    title: 'Walmart trennt sich von Shoes.com und Bare Necessities',
+    summary: 'Walmart verkauft die Schuh-Website Shoes.com an die Private-Equity-Firma CriticalPoint Capital und die Dessous-Marke Bare Necessities an den israelischen Textilhersteller Delta Galil. Nach dem Abschied von Modcloth im Oktober und der Schließung von Jet.com setze der weltgrößte Einzelhändler seine digitale Fokussierung fort.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    companies: ['Walmart'],
+    source: 'Peinsights.com',
+    topics: ['Marketplace'],
+    countries: ['USA'],
+    tags: ['walmart', 'divestment', 'digital-strategy'],
+    content: 'Walmart verkauft die Schuh-Website Shoes.com an die Private-Equity-Firma CriticalPoint Capital und die Dessous-Marke Bare Necessities an den israelischen Textilhersteller Delta Galil, berichtet Peinsights.com. Nach dem Abschied von Modcloth im Oktober und der Schließung von Jet.com setze der weltgrößte Einzelhändler seine digitale Fokussierung fort. Die Kundenzahlen und Umsätze in den betreffenden Kategorien seien auf Walmart.com inzwischen deutlich höher als zum Zeitpunkt der ursprünglichen Übernahmen.'
+  },
+  {
+    id: 'newsletter-10',
+    title: 'Salesforce erwägt Umbenennung in Agentforce',
+    summary: 'Salesforce erwägt eine Umbenennung in "Agentforce". Chef Marc Benioff habe das Cloud-Geschäft gedanklich abgehakt und konzentriere sich ausschließlich auf KI-Agenten. Kundenbefragungen hätten ergeben, dass "niemand mehr" über die Cloud spreche.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-07T18:56:03Z',
+    companies: ['Salesforce'],
+    source: 'T3N.de',
+    topics: ['AI Tools'],
+    countries: ['USA'],
+    tags: ['salesforce', 'ai', 'rebranding', 'agents'],
+    content: 'Salesforce erwägt eine Umbenennung in "Agentforce", berichtet T3N.de. Chef Marc Benioff habe das Cloud-Geschäft gedanklich abgehakt und konzentriere sich ausschließlich auf KI-Agenten. Kundenbefragungen hätten ergeben, dass "niemand mehr" über die Cloud spreche. Bei der Dreamforce-Konferenz habe Benioff das Wort nicht ein einziges Mal verwendet.'
+  },
+  {
+    id: 'newsletter-11',
+    title: 'Chinesische KI-Modelle halten 30 Prozent des Weltmarkts',
+    summary: 'Chinesische Open-Source-KI-Modelle erreichen fast 30 Prozent globale Nutzung. Alibabas Qwen, DeepSeeks V3 und Moonshots Kimi hätten binnen Monaten von 1,2 auf 30 Prozent zugelegt. Chinesisch sei mit fünf Prozent die zweithäufigste Sprache geworden, in der Prompts verfasst werden.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-08T17:30:07Z',
+    companies: ['Alibaba'],
+    source: 'Scmp.com',
+    topics: ['AI Tools'],
+    countries: ['China'],
+    tags: ['ai', 'china', 'open-source', 'qwen'],
+    metrics: {
+      globalUsage: '30%',
+      previousUsage: '1.2%'
+    },
+    content: 'Chinesische Open-Source-KI-Modelle erreichen fast 30 Prozent globale Nutzung, berichtet Scmp.com. Alibabas Qwen, DeepSeeks V3 und Moonshots Kimi hätten binnen Monaten von 1,2 auf 30 Prozent zugelegt. Angetrieben werde die Entwicklung nicht nur durch die niedrigen Kosten von Open-Source-Lösungen, sondern auch durch die aggressiven Release-Zyklen.'
+  },
+  {
+    id: 'newsletter-12',
+    title: 'Deutschland auf Platz eins bei der KI-Hybris',
+    summary: '83 Prozent der Deutschen schätzen ihre KI-Kenntnisse als "sehr gut" oder "ziemlich gut" ein – der mit Abstand höchste Wert unter neun befragten westlichen Industrieländern. Bemerkenswert sei das Selbstbewusstsein, weil fast jeder Dritte KI niemals nutze und die Hälfte der Befragten nicht einmal halbwegs regelmäßig darauf zurückgreife.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    originalPublishedAt: '2025-12-08T00:32:57Z',
+    companies: [],
+    source: 'Zeit.de',
+    topics: ['AI Tools'],
+    countries: ['DE'],
+    tags: ['ai', 'deutschland', 'umfrage', 'hybris'],
+    metrics: {
+      selfRatedGood: '83%',
+      neverUse: '33%'
+    },
+    content: '83 Prozent der Deutschen schätzen ihre KI-Kenntnisse als "sehr gut" oder "ziemlich gut" ein – der mit Abstand höchste Wert unter neun befragten westlichen Industrieländern, so laut Zeit.de das Ergebnis einer neuen Yougov-Umfrage. Bemerkenswert sei das Selbstbewusstsein, weil fast jeder Dritte KI niemals nutze und die Hälfte der Befragten nicht einmal halbwegs regelmäßig darauf zurückgreife.'
+  },
+  {
+    id: 'newsletter-13',
+    title: 'Unternehmen sollten KI-Browser blockieren',
+    summary: 'Das Marktforschungsunternehmen Gartner rät Unternehmen dringend vom Einsatz von KI-Browsern wie ChatGPT Atlas oder Perplexity Comet ab. Die Browser mit integrierten KI-Assistenten übermittelten vertrauliche Daten an cloudbasierte Backends und erhöhten das Risiko für Datenlecks erheblich.',
+    publishedAt: '2025-12-09T06:14:00Z',
+    companies: [],
+    source: 'Golem.de',
+    topics: ['AI Tools'],
+    countries: ['DE'],
+    tags: ['ai', 'browser', 'security', 'data-leak'],
+    content: 'Das Marktforschungsunternehmen Gartner rät Unternehmen dringend vom Einsatz von KI-Browsern wie ChatGPT Atlas oder Perplexity Comet ab, berichtet Golem.de. Die Browser mit integrierten KI-Assistenten übermittelten vertrauliche Daten an cloudbasierte Backends und erhöhten das Risiko für Datenlecks erheblich. Besonders gefährlich seien Prompt-Injection-Angriffe, bei denen Angreifer der KI schädliche Anweisungen unterschieben könnten.'
+  },
   {
     id: '1',
     title: '95 Prozent der Händler kennen manipulative Bewertungen',
@@ -138,12 +332,26 @@ export const mockArticles: Article[] = [
     title: 'Wie sich vermeiden lässt, dass KI-Chatbots zum Cyberrisiko werden',
     summary: 'KI-gesteuerte Chatbots können als Einfallstor für Phishing und Datendiebstahl fungieren. Dahinter stehen aber klassische Angriffsmuster, daher helfen auch klassische, stringent umgesetzte Sicherheitsmaßnahmen.',
     publishedAt: '2025-12-08T06:14:00Z',
+    originalPublishedAt: '2025-12-05T00:00:00Z',
     companies: [],
     source: 'etailment.de',
     topics: ['AI Tools'],
     countries: ['DE'],
     tags: ['ai', 'chatbots', 'cybersecurity', 'phishing', 'security'],
     content: 'KI-gesteuerte Chatbots können als Einfallstor für Phishing und Datendiebstahl fungieren. Dahinter stehen aber klassische Angriffsmuster, sagt Cybersecurity-Experte Udo Schneider. Daher helfen auch klassische, stringent umgesetzte Sicherheitsmaßnahmen. Welche, erläutert er im Interview mit "Der Handel".'
+  },
+  {
+    id: 'featured-ki-aussendienst',
+    title: 'KI brieft den Außendienst',
+    summary: 'Wenn Künstliche Intelligenz der Kundschaft im E-Commerce passgenaue Produkte vorschlagen kann, dann müsste das auch im Großhandel funktionieren. Das ist die Idee des Start-ups Acto aus Paderborn – nur gehen die Vorschläge nicht an die Kunden, sondern an den Außendienst.',
+    publishedAt: '2025-12-05T06:14:00Z',
+    originalPublishedAt: '2025-12-05T00:00:00Z',
+    companies: ['Acto'],
+    source: 'etailment.de',
+    topics: ['AI Tools'],
+    countries: ['DE'],
+    tags: ['ai', 'startup', 'b2b', 'sales', 'automation'],
+    content: 'Wenn Künstliche Intelligenz der Kundschaft im E-Commerce passgenaue Produkte vorschlagen kann, dann müsste das auch im Großhandel funktionieren. Das ist die Idee des Start-ups Acto aus Paderborn – nur gehen die Vorschläge nicht an die Kunden, sondern an den Außendienst. Der könne mit Daten statt mit Bauchgefühl auftreten.'
   },
   {
     id: '10',

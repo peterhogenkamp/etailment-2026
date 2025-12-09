@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { mockArticles, Article, REPORTED_COMPANIES, COUNTRIES } from '@/data/mockArticles';
-import MarketPulse from '@/components/MarketPulse';
+import FeaturedArticles from '@/components/FeaturedArticles';
 import StoryCard from '@/components/StoryCard';
 import FilterDrawer from '@/components/FilterDrawer';
 import InsightsGrid from '@/components/InsightsGrid';
@@ -201,8 +201,8 @@ export default function Home() {
         </div>
       </header>
 
-      {/* MarketPulse */}
-      <MarketPulse articles={mockArticles} />
+      {/* Featured Articles */}
+      <FeaturedArticles articles={mockArticles} />
 
       {/* Main Content - 3 Column Layout */}
       <div className="max-w-7xl mx-auto px-4 py-4">
@@ -279,7 +279,7 @@ export default function Home() {
 
           {/* Right Column: Insights Dashboard */}
           <div className="hidden xl:block w-80 flex-shrink-0">
-            <div className="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+            <div className="space-y-4 h-[910px] overflow-y-auto sticky top-[140px]">
               {/* Zahlen des Tages */}
               <section>
                 <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">

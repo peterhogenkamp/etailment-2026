@@ -39,9 +39,20 @@ export default function StoryCard({ article, onTagClick, onCompanyClick, highlig
         </p>
 
         <div className="flex items-center gap-1.5 text-[10px] text-slate-500 flex-wrap">
-          <span title={formatTimeDisplay(article.publishedAt).tooltip}>
-            {formatTimeDisplay(article.publishedAt).display}
+          <span title={formatTimeDisplay(article.originalPublishedAt || article.publishedAt).tooltip}>
+            {formatTimeDisplay(article.originalPublishedAt || article.publishedAt).display}
           </span>
+          {article.originalPublishedAt && article.originalPublishedAt !== article.publishedAt && (
+            <>
+              <span className="text-slate-300">•</span>
+              <span 
+                className="text-slate-400 italic" 
+                title={formatTimeDisplay(article.publishedAt).tooltip}
+              >
+                Newsletter: {formatTimeDisplay(article.publishedAt).display}
+              </span>
+            </>
+          )}
           {article.companies.length > 0 && (
             <>
               <span className="text-slate-300">•</span>
