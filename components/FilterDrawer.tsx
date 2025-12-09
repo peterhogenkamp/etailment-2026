@@ -75,7 +75,7 @@ export default function FilterDrawer({
       <aside
         className={`
           fixed lg:sticky top-0 left-0 h-full lg:h-auto
-          w-48 bg-white border-r border-slate-200 z-50
+          w-48 bg-white border-r border-slate-200 z-20
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           overflow-y-auto
@@ -106,7 +106,7 @@ export default function FilterDrawer({
           {/* Companies */}
           <div className="mb-2">
             <h3 className="text-[10px] font-semibold text-slate-700 mb-0.5">Unternehmen</h3>
-            <div className="space-y-0 max-h-32 overflow-y-auto">
+            <div className="space-y-0 max-h-[153px] overflow-y-auto">
               {companies.map((company) => (
                 <label
                   key={company}
@@ -127,7 +127,7 @@ export default function FilterDrawer({
           {/* Sources */}
           <div className="mb-2">
             <h3 className="text-[10px] font-semibold text-slate-700 mb-0.5">Quellen</h3>
-            <div className="space-y-0 max-h-32 overflow-y-auto">
+            <div className="space-y-0 max-h-[153px] overflow-y-auto">
               {sources.map((source) => (
                 <label
                   key={source}
@@ -236,6 +236,17 @@ export default function FilterDrawer({
                   className="rounded border-slate-300 text-red-600 focus:ring-red-500 w-3 h-3"
                 />
                 <span>China</span>
+              </label>
+
+              {/* UK */}
+              <label className="flex items-center gap-1 text-[10px] text-slate-700 cursor-pointer hover:bg-slate-50 py-0.5 rounded font-medium">
+                <input
+                  type="checkbox"
+                  checked={activeFilters.countries.includes('UK')}
+                  onChange={() => toggleFilter('countries', 'UK')}
+                  className="rounded border-slate-300 text-red-600 focus:ring-red-500 w-3 h-3"
+                />
+                <span>UK</span>
               </label>
             </div>
           </div>
