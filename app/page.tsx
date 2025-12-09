@@ -29,6 +29,10 @@ export default function Home() {
   });
   const [highlightTag, setHighlightTag] = useState<string | null>(null);
   const [selectedInsight, setSelectedInsight] = useState<typeof insights[0] | null>(null);
+  const [expandedNewsletters, setExpandedNewsletters] = useState<Set<string>>(() => {
+    // Default: first 2 newsletters expanded
+    return new Set(newsletters.slice(0, 2).map(nl => nl.id));
+  });
 
   // Handle insight modal from sidebar
   useEffect(() => {
@@ -97,19 +101,52 @@ export default function Home() {
            activeFilters.countries.length > 0;
   }, [activeFilters]);
 
+  // Group articles by newsletter date
+  const articlesByNewsletter = useMemo(() => {
+    const grouped: Record<string, Article[]> = {};
+    filteredArticles.forEach(article => {
+      // Match articles to newsletters by date (same day)
+      const articleDate = new Date(article.publishedAt).toISOString().split('T')[0];
+      const newsletter = newsletters.find(nl => {
+        const nlDate = new Date(nl.date).toISOString().split('T')[0];
+        return nlDate === articleDate;
+      });
+      if (newsletter) {
+        if (!grouped[newsletter.id]) {
+          grouped[newsletter.id] = [];
+        }
+        grouped[newsletter.id].push(article);
+      }
+    });
+    return grouped;
+  }, [filteredArticles]);
+
   // Combine newsletters and articles, sorted by date
   // Hide newsletters when any filter is active
   const combinedFeed = useMemo(() => {
-    const items: Array<{ type: 'newsletter' | 'article'; data: any; date: string }> = [
-      // Only include newsletters if no filters are active
-      ...(hasActiveFilters ? [] : newsletters.map(nl => ({ type: 'newsletter' as const, data: nl, date: nl.date }))),
-      ...filteredArticles.map(art => ({ type: 'article' as const, data: art, date: art.publishedAt }))
-    ];
+    if (hasActiveFilters) {
+      // When filters are active, only show articles
+      return filteredArticles.map(art => ({ type: 'article' as const, data: art, date: art.publishedAt }))
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    }
+
+    // Group newsletters with their articles
+    const items: Array<{ type: 'newsletter' | 'article'; data: any; date: string; newsletterId?: string }> = [];
+    
+    newsletters.forEach(newsletter => {
+      items.push({ type: 'newsletter' as const, data: newsletter, date: newsletter.date, newsletterId: newsletter.id });
+      // Add articles for this newsletter if expanded
+      if (expandedNewsletters.has(newsletter.id) && articlesByNewsletter[newsletter.id]) {
+        articlesByNewsletter[newsletter.id].forEach(article => {
+          items.push({ type: 'article' as const, data: article, date: article.publishedAt, newsletterId: newsletter.id });
+        });
+      }
+    });
     
     return items.sort((a, b) => 
       new Date(b.date).getTime() - new Date(a.date).getTime()
     );
-  }, [filteredArticles, hasActiveFilters]);
+  }, [filteredArticles, hasActiveFilters, expandedNewsletters, articlesByNewsletter]);
 
   const handleTagClick = (tag: string) => {
     setHighlightTag(highlightTag === tag ? null : tag);
@@ -127,6 +164,18 @@ export default function Home() {
   const isHighlighted = (article: Article) => {
     if (!highlightTag) return false;
     return article.tags.includes(highlightTag);
+  };
+
+  const toggleNewsletter = (newsletterId: string) => {
+    setExpandedNewsletters(prev => {
+      const next = new Set(prev);
+      if (next.has(newsletterId)) {
+        next.delete(newsletterId);
+      } else {
+        next.add(newsletterId);
+      }
+      return next;
+    });
   };
 
   return (
@@ -237,9 +286,16 @@ export default function Home() {
                 {combinedFeed.length > 0 ? (
                   combinedFeed.map((item, index) => {
                     if (item.type === 'newsletter') {
+                      const isExpanded = expandedNewsletters.has(item.data.id);
+                      const articleCount = articlesByNewsletter[item.data.id]?.length || 0;
                       return (
                         <div key={item.data.id} className="mb-3">
-                          <NewsletterCard newsletter={item.data} />
+                          <NewsletterCard 
+                            newsletter={item.data} 
+                            isExpanded={isExpanded}
+                            articleCount={articleCount}
+                            onToggle={() => toggleNewsletter(item.data.id)}
+                          />
                         </div>
                       );
                     } else {
